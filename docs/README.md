@@ -26,14 +26,18 @@ service 단에서는 domain 을 이용해 해당 요청에 관련된 로직을 �
 사용자 클라이언트의 요청과 응답을 처리하기 위해서
 다른 로직 클래스를 적절히 사용하는 보드
 
-1. ready (게임 준비)
+1. ready (게임 준비) -> return List<String> bridge 
     - view : 다리의 길이를 입력해주세요.
-    - input (request) : 다리 길이 요청
+    - input (request) : 다리 길이 입력 (요청)
+    - service : 요청 받은 다리 길이로 다리 생성
     - output (response) : start 응답
    
-2. start (메인 게임, 반복 구문 처리)
+2. start (메인 게임, 반복 구문 처리) -> return 게임 성공 or 실패 
     - view : 이동할 칸을 선택해주세요. (위: U, 아래: D)
-    - input (request) : 이동할 칸 입력 요청
+    - input (request) : 이동할 칸 입력 (요청)
+    - service : 
+      1. 브릿지와 입력 값 비교 -> return true or false
+      2. 위, 아래 맵 만들기
     - output (response) : 
       1. 이동 후 결과 Map 응답 
       2. 이동 후 결과 성공 -> 게임 진행 응답 or 게임 끝 응답
@@ -46,6 +50,13 @@ service 단에서는 domain 을 이용해 해당 요청에 관련된 로직을 �
       1. 재시작 요청 시 -> start 응답
       2. 종료 요청 시 -> finish 응답
 
-4. finish
+4. finish 
    - view : 최종 게임 결과
+
+
+질문
+Q : controller 에 필드를 만들어도 될까?
+A : 필드를 만들고 쓰는 것 자체가 컨트롤러 역할에 위배 되는 것
+
+
    
